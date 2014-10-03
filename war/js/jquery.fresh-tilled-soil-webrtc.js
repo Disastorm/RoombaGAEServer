@@ -477,42 +477,16 @@
 
     var updateLocalVideoForEntryState = function ($this) {
 
-        // reveal local video
-        $this.opts.localVideo.style['opacity'] = 0;
-        $this.opts.localVideo.style['box-shadow'] = 'none';
-        $this.opts.localVideo.style['border'] = '1px solid rgba(0,0,0,0.4)';
-
     };
 
     var updateLocalVideoForWaitingState = function ($this) {
 
-        var statusElemTopOffset = $($this.opts.statusElem).offset().top;
-        var localVideoHeight = statusElemTopOffset * 0.88;
-        $this.opts.localVideo.style['height'] = (localVideoHeight) + 'px';
-        $this.opts.localVideo.style['width'] = (localVideoHeight / 0.75) + 'px';
-        $this.opts.localVideo.style['margin-left'] = -(localVideoHeight / 0.75) / 2 + 'px';
-        $this.opts.localVideo.style['box-shadow'] = 'none';
-        $this.opts.localVideo.style['border'] = '1px solid rgba(0,0,0,0.4)';
-
-        // reveal local video
-        $this.opts.localVideo.style['opacity'] = 1;
 
     };
 
     var updateLocalVideoForConnectedState = function ($this) {
 
-        // TODO - make this a css style
-        var statusWindowHeight = $(window).height() || $(screen).height();
-        var localVideoHeight = statusWindowHeight * 0.13;
-        $this.opts.localVideo.style['height'] = (localVideoHeight) + 'px';
-        $this.opts.localVideo.style['width'] = (localVideoHeight / 0.75) + 'px';
-        $this.opts.localVideo.style['margin-left'] = -(localVideoHeight / 0.75) / 2 + 'px';
-        $this.opts.localVideo.style['box-shadow'] = '0px 0px 12px rgba(185,185,185,0.5)';
-        $this.opts.localVideo.style['border'] = '1px solid rgba(0,0,0,0.4)';
-
-        // reveal local video
-        $this.opts.localVideo.style['opacity'] = 0.77;
-
+   
     };
 
     //> Remote media related functions -------------------------------------------------------------**>

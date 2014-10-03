@@ -4,26 +4,22 @@
 <meta charset="UTF-8">
 <title>Fresh Tilled Soil Video Conference | WebRTC jQuery Plug-in Demo</title>
 
-<!-- Stylesheet Ressources -->
-<link rel="stylesheet" href="css/fts-webrtc-styles.css">
+     <meta name="viewport" content="width=device-width">
+     <meta name="mobile-web-app-capable" content="yes">
 
 </head>
 
-<body>
+<body style="margin:0px;">
 
 <!-- main container -->
+
 <div id="mainContainer" class="main-container">
     <input type="text" id="channelName" value="flixster" style="display:none;"/>
 
-    <!-- local video -->
     <video id="localVideo" class="local-video"></video>
-
-    <!-- remote video -->    
     <video id="remoteVideo" class="remote-video" autoplay></video>
 
-
-    <!-- video status & room entry bar -->
-    <div id="videoStatus" class="video-status" style="display:none;">
+    <div id="videoStatus" class="video-status">
     </div>
 
 </div>
@@ -40,6 +36,7 @@
         	channelInputElem : $("#channelName")
         });
     });    
+    
 </script>
 
 </body>
