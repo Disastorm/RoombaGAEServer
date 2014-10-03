@@ -41,73 +41,69 @@ requirejs([
     "app/model"
 ], function(Roomba) {
         Roomba.module("RoombaController", function(RoombaController, Roomba, Backbone, Marionette, $, _) {
+        	
+        	var controlStateModel = null;
+        	
         	RoombaController.Controller = Marionette.Controller.extend({
-                
-                initialize: function(options) {
-                	var controller = this;
                 	
-                	buttonView = new Roomba.RoombaView.ButtonView({
-                		forwardBtnId: options.forwardBtnId,
-                		leftBtnId: options.leftBtnId,
-                		rightBtnId: options.rightBtnId,
-                		controller: controller
-                	});
-                	
-                	
-                	 $.getJSON("/token?c=key").done(function(response){
-                     	console.log(response);
-                     	$("#token").text(response.token);
-                         
-                     	this.channel = new goog.appengine.Channel(response.token);
-                     	
-                     	this.socket = this.channel.open();
-                     
-                     	this.socket.onmessage = this.onMessage;
-                     }.bind(this));   
-                	
-                },
-                
-                onRightKeyDown: function() {
-                	console.log("Right Key Down");
-                	this.sendMessage("SPIN_RIGHT");
-                },
-                
-                onRightKeyUp: function() {
-                	console.log("Right Key Up");
-                	this.sendMessage("STOP");
-                },
-                
-                onLeftKeyDown: function() {
-                	console.log("Left Key Down");
-                	this.sendMessage("SPIN_LEFT");
-                },
-                
-                onLeftKeyUp: function() {
-                	console.log("Left Key Up");
-                	this.sendMessage("STOP");
-                },
-                
-                onForwardKeyDown: function() {
-                	console.log("Foward Key Down");
-                	this.sendMessage("MOVE_FORWARD");
-                },
-                
-                onForwardKeyUp: function() {
-                	console.log("Foward Key Up");
-                	this.sendMessage("STOP");
-                },
-                
-                sendMessage: function(msg) {
-              	  var path = "/chat?channelKey=key&message=" +msg;
-              	  
-                 	  var xhr = new XMLHttpRequest();
-                 	  xhr.open('POST', path, true);
-                 	  xhr.send();    	    	
-                },
+
+				initialize: function(options) {
+					var controller = this;
+					
+					controlStateModel = new Roomba.RoombaModel.ControlStateModel({});
+					
+					buttonView = new Roomba.RoombaView.ButtonView({
+						forwardBtnId: options.forwardBtnId,
+						leftBtnId: options.leftBtnId,
+						rightBtnId: options.rightBtnId,
+						model: controlStateModel,
+						controller: controller
+					});
+					
+					
+					 $.getJSON("/token?c=key").done(function(response){
+	                     	console.log(response);
+	                     	$("#token").text(response.token);
+	                         
+	                     	this.channel = new goog.appengine.Channel(response.token);
+	                     	
+	                     	this.socket = this.channel.open();
+	                     
+	                     	this.socket.onmessage = this.onMessage;
+	                  }.bind(this));    
+					
+				},
+				
+				onDriveCommandChange: function() {
+					var command = controlStateModel.getDriveCommand();
+					console.log(command);
+					this.sendMessage(command);
+				},
+				
+				onSpeedCommandChange: function() {
+					var command = controlStateModel.getSpeedCommand();
+					console.log(command);
+					this.sendMessage(command);
+				},
+				
+				onVacuumCommandChange: function() {
+					var command = controlStateModel.getVacuumCommand();
+					console.log(command);
+					this.sendMessage(command);
+				},
+				
+				sendMessage: function(msg) {
+				  var path = "/chat?channelKey=key&message=" +msg;
+				  
+				 	  var xhr = new XMLHttpRequest();
+				 	  xhr.open('POST', path, true);
+				 	  xhr.send();    	    	
+				},
                   
-	            onMessage: function(msg) {
-	            	console.log(msg);
-	            }
+				onMessage: function(msg) {
+					console.log(msg);
+				}
+               
             });
         });
         
