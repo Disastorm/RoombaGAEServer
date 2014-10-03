@@ -27,7 +27,7 @@ define([
 				
 				if(e.keyCode === 32 && !this.model.get("spacebarEngaged")) {
 					this.model.set("spacebarEngaged", true);
-					this.controller.sendMessage("BEEP_LO");
+					this.controller.sendMessage("BEEP_HI");
 				}
 				
 				if(e.keyCode === 16 && !this.model.get("ctrlEngaged")) {
