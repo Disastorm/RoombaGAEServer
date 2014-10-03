@@ -13,15 +13,17 @@
 
 <!-- main container -->
 <div id="mainContainer" class="main-container">
+    <input type="text" id="channelName" value="flixster" style="display:none;"/>
 
     <!-- local video -->
     <video id="localVideo" class="local-video"></video>
 
-    <!-- remote video -->
+    <!-- remote video -->    
     <video id="remoteVideo" class="remote-video" autoplay></video>
 
+
     <!-- video status & room entry bar -->
-    <div id="videoStatus" class="video-status">
+    <div id="videoStatus" class="video-status" style="display:none;">
     </div>
 
 </div>
@@ -34,8 +36,10 @@
 <!-- Plugin Initialization -->
 <script type="text/javascript">
     $(function() {
-        $('#mainContainer').createVideoChat();
-    });
+        $('#mainContainer').createVideoChat({
+        	channelInputElem : $("#channelName")
+        });
+    });    
 </script>
 
 </body>

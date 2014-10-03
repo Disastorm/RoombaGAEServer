@@ -57,7 +57,7 @@
         rtcStatusUpdate: {
 
             "entry": {
-                statusHTML: 'Enter any room name into the field and<br>give that name to a friend to enter...' + '<input id="videoChannelInput" class="video-channel-input" type="text" placeholder="enter channel name" />' + '<button id="videoChatStartButton" class="video-chat-start-button">Start Chat</button>',
+                statusHTML: '',//'Enter any room name into the field and<br>give that name to a friend to enter...' + '<input id="videoChannelInput" class="video-channel-input" type="text" placeholder="enter channel name" />' + '<button id="videoChatStartButton" class="video-chat-start-button">Start Chat</button>',
                 statusFx: function ($this, statusType) { // displays channel entry form
 
 									// reset variables
@@ -85,6 +85,7 @@
                     console.log('entry status');
 
                     // handling for channel input field / button
+                    /*
                     $('#videoChatStartButton').off().on('click', function () {
                         var $channelInput = $($this.opts.channelInputElem);
                         if ($channelInput.val().length <= 0) {
@@ -97,6 +98,7 @@
                         }
 
                     });
+                    */
 
                     // handling for channel input field if enter is pressed instead of button click
                     $("#videoChannelInput").keyup(function (e) {
@@ -113,7 +115,10 @@
                             }
                         }
                     });
-
+                    
+                    var $channelInput = $($this.opts.channelInputElem);
+                    $this.opts.currChannelName = $channelInput.val();   // 
+                    startLocalMediaCapture($this, connectToSignallingServer);
                 }
             },
 
@@ -513,45 +518,13 @@
     //> Remote media related functions -------------------------------------------------------------**>
 
     var updateRemoteVideoForEntryState = function ($this) {
-
-        // hide local video
-        $this.opts.remoteVideo.style['opacity'] = 0;
-
     };
 
     var updateRemoteVideoForWaitingState = function ($this) {
 
-        // hide local video
-        $this.opts.remoteVideo.style['opacity'] = 0;
-
     };
 
     var updateRemoteVideoForConnectedState = function ($this) {
-
-        var screenHeight = $(window).height() || $(screen).height();
-        var screenWidth = $(window).width() || $(screen).width();
-
-        var remoteVidHeight = screenHeight;
-        var remoteVidWidth = screenHeight / 0.75;
-
-        var remoteVidMarginBottom = 0;
-        var remoteVidMarginLeft = (screenWidth - remoteVidWidth) / 2;
-
-        if (remoteVidWidth > screenWidth) {
-            // update video size if it exceeds screen width
-            remoteVidHeight = screenWidth * 0.75;
-            remoteVidWidth = screenWidth;
-            remoteVidMarginBottom = ((screenHeight - remoteVidHeight));
-            remoteVidMarginLeft = 0;
-        }
-
-        $this.opts.remoteVideo.style['height'] = remoteVidHeight + 'px';
-        $this.opts.remoteVideo.style['width'] = remoteVidWidth + 'px';
-        $this.opts.remoteVideo.style['margin-bottom'] = remoteVidMarginBottom + 'px';
-        $this.opts.remoteVideo.style['margin-left'] = remoteVidMarginLeft + 'px';
-
-        // reveal local video
-        $this.opts.remoteVideo.style['opacity'] = 1;
 
     };
 
