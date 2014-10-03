@@ -12,11 +12,31 @@
     <!-- Consider inlining CSS to reduce the number of requested files -->
     <!--                                                               -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script data-main="/app" src="/require.js"></script>
     <script type="text/javascript" src="/_ah/channel/jsapi"></script>
+   
     
     <title>Flixster Roomba Control Center</title>
     
+	<style>
+		.up-btn {
+			width: 60px;
+			height: 50px;
+			margin: 0px 0px 0px 13px;
+			vertical-align:middle;
+		}
+		
+		.left-right-btn {
+			width: 80px;
+			height: 45px;
+			margin: 2px;
+			vertical-align:middle;
+		
+		}
+		
+				
+	</style>
+
 
   </head>
 
@@ -44,51 +64,29 @@
     </div>
 
     <div class="container">
-    <h1>Flixster Roomba Control Center</h1>
-    <dl class="dl-horizontal">
-        <dt>Token:</dt>
-        <dd id="token"></dd>
-    </dl>
+	    <h1>Flixster Roomba Control Center</h1>
+	    <dl class="dl-horizontal">
+	        <dt>Token:</dt>
+	        <dd id="token"></dd>
+	    </dl>
     
-    <div>
-        <input class="btn btn-primary" value="Forward" name="forward" id="fwdBtn" type="button" onclick="sendMessage('MOVE_FORWARD')"/>
+	      <div class="row"> 
+			<div class="col-md-6" style= "border: solid 1px lightgrey; height: 400px; padding: 10px">
+				<div class="row">
+					<div class="col-md-offset-2 col-md-2">
+						<button type="button" class="btn btn-primary up-btn" id="button-forward"><span class="glyphicon glyphicon-arrow-up"></span></button> 
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-offset-1 col-md-2">
+						<button type="button" class="btn btn-primary left-right-btn" id="button-left"><span class="glyphicon glyphicon-arrow-left"></span></button> 
+					</div>
+					<div class="col-md-2">
+						<button type="button" class="btn btn-primary left-right-btn" id="button-right"><span class="glyphicon glyphicon-arrow-right"></span></button> 
+					</div>
+				</div>
+			</div>	    
+		</div>
     </div>
-    
-    <div>
-        <input class="btn btn-primary" value="Stop" name="stop" id="stopBtn" type="button" onclick="sendMessage('STOP')"/>
-    </div>
-    
-    <script>
-    $.getJSON("/token?c=key").done(function(response){
-    	console.log(response);
-    	$("#token").text(response.token);
-        
-    	channel = new goog.appengine.Channel(response.token);
-    	
-    	
-    	console.log(channel);
-    	socket = channel.open();
-    	socket.onmessage = onMessage;
-    	
-    });    
-    
-    
-    function sendMessage(msg){
-	  var path = "/chat?channelKey=key&message=" +msg;
-	  
-   	  var xhr = new XMLHttpRequest();
-   	  xhr.open('POST', path, true);
-   	  xhr.send();    	    	
-    }
-    
-    function onMessage(msg){
-    	console.log(msg);
-    }
-    </script>
-    
-
-    </div>
-    
-   
   </body>
 </html>

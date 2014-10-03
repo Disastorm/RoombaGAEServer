@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;
-import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import com.shared.FieldVerifier;
 
 /**
  * The server side implementation of the RPC service.
