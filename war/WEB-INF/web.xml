@@ -24,7 +24,7 @@
   <servlet-mapping>
     <servlet-name>chatServlet</servlet-name>
     <url-pattern>/chat</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping>  
   
   <!-- Default page to serve -->
   <welcome-file-list>

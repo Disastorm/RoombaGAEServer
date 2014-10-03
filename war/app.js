@@ -61,8 +61,9 @@ requirejs([
                      	this.channel = new goog.appengine.Channel(response.token);
                      	
                      	this.socket = this.channel.open();
+                     
                      	this.socket.onmessage = this.onMessage;
-                     });   
+                     }.bind(this));   
                 	
                 },
                 
@@ -102,12 +103,11 @@ requirejs([
                  	  var xhr = new XMLHttpRequest();
                  	  xhr.open('POST', path, true);
                  	  xhr.send();    	    	
-                  },
+                },
                   
-                  onMessage: function(msg) {
-                  	console.log(msg);
-                  }
-               
+	            onMessage: function(msg) {
+	            	console.log(msg);
+	            }
             });
         });
         
