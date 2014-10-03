@@ -7,13 +7,13 @@
 
   <!-- Servlets -->
   <servlet>
-    <servlet-name>mainServlet</servlet-name>
-    <servlet-class>com.server.MainServiceImpl</servlet-class>
+    <servlet-name>createChannelServlet</servlet-name>
+    <servlet-class>com.server.CreateChannelServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
-    <servlet-name>mainServlet</servlet-name>
-    <url-pattern>/</url-pattern>
+    <servlet-name>createChannelServlet</servlet-name>
+    <url-pattern>/token</url-pattern>
   </servlet-mapping>
   
   <servlet>

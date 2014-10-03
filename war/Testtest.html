@@ -12,6 +12,7 @@
     <!-- Consider inlining CSS to reduce the number of requested files -->
     <!--                                                               -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="/_ah/channel/jsapi"></script>
     
     <title>Flixster Roomba Control Center</title>
@@ -44,10 +45,48 @@
 
     <div class="container">
     <h1>Flixster Roomba Control Center</h1>
+    <dl class="dl-horizontal">
+        <dt>Token:</dt>
+        <dd id="token"></dd>
+    </dl>
     
-    <p>
-    Hello
-    </p>
+    <div>
+        <input class="btn btn-primary" value="Forward" name="forward" id="fwdBtn" type="button" onclick="sendMessage('MOVE_FORWARD')"/>
+    </div>
+    
+    <div>
+        <input class="btn btn-primary" value="Stop" name="stop" id="stopBtn" type="button" onclick="sendMessage('STOP')"/>
+    </div>
+    
+    <script>
+    $.getJSON("/token?c=key").done(function(response){
+    	console.log(response);
+    	$("#token").text(response.token);
+        
+    	channel = new goog.appengine.Channel(response.token);
+    	
+    	
+    	console.log(channel);
+    	socket = channel.open();
+    	socket.onmessage = onMessage;
+    	
+    });    
+    
+    
+    function sendMessage(msg){
+	  var path = "/chat?channelKey=key&message=" +msg;
+	  
+   	  var xhr = new XMLHttpRequest();
+   	  xhr.open('POST', path, true);
+   	  xhr.send();    	    	
+    }
+    
+    function onMessage(msg){
+    	console.log(msg);
+    }
+    </script>
+    
+
     </div>
     
    
